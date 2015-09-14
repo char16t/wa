@@ -22,12 +22,17 @@ def execute_command(command_file):
 
 def get_command_file(argv_list):
     current_directory = os.path.join(os.path.expanduser("~"), ".wa") 
+    counter = 0
     for arg in argv_list[:-1]:
+        if os.path.isfile(os.path.join(current_directory, arg + ".py")):
+            return os.path.join(current_directory, arg + ".py")
+        if os.path.isfile(os.path.join(current_directory, arg + ".wa")):
+            return os.path.join(current_directory, arg + ".wa")
+
         current_directory = os.path.join(current_directory, arg)
-        if os.path.exists(current_directory):
-            print(current_directory)
-        else:
-            return None 
+        if not os.path.exists(current_directory):
+            return None
+        counter += 1
 
     py_command_file = os.path.join(current_directory, argv_list[-1] + ".py")
     wa_command_file = os.path.join(current_directory, argv_list[-1] + ".wa")
