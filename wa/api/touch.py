@@ -1,7 +1,7 @@
-import os
 import sys
 
 def main(files):
+    import os
     for fname in files:
         fhandle = open(fname, 'a')
         try:
@@ -9,5 +9,5 @@ def main(files):
         finally:
             fhandle.close()
 
-if __name__ == "__main__":
+if __name__ == "builtins":
     main(sys.argv[1:])

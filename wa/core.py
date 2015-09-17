@@ -11,6 +11,8 @@ def main(in_args):
 def execute_command(command_file, args = None):
     if args == None:
         args = [command_file]
+    else:
+        args = [command_file] + args
 
     if command_file != None:
         if command_file[-2:] == "py":
@@ -39,8 +41,17 @@ def get_command_file(argv_list):
 
         current_directory = os.path.join(current_directory, arg)
         if not os.path.exists(current_directory):
-            return (None, None)
+            break
         counter += 1
+
+    if os.path.isfile(os.path.abspath(os.path.join(os.path.dirname(__file__), "api",
+        argv_list[0] + ".py"))):
+        return (os.path.abspath(os.path.join(os.path.dirname(__file__), "api", argv_list[0] +
+        ".py")), argv_list[1:])
+    else:
+        return (None, None)
+
+    return (None, None)
 
 if __name__ == "__main__":
     main(sys.argv[1:])
