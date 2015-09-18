@@ -2,6 +2,9 @@
 
 import sys
 import os
+import re
+
+variables = {}
 
 def main(in_args):
     if len(in_args) >= 1:
@@ -24,6 +27,7 @@ def execute_command(command_file, args = None):
         elif command_file[-2:] == "wa":
             with open(command_file) as o:
                 for line in o.readlines():
+                    line = variables_substitution(line)
                     main(line.split())
     else:
         print("Command not found")
@@ -52,6 +56,12 @@ def get_command_file(argv_list):
         return (None, None)
 
     return (None, None)
+
+def variables_substitution(line):
+    global variables
+    for var in variables:
+       line = line.replace('${'+var+'}', variables[var]) 
+    return line
 
 if __name__ == "__main__":
     main(sys.argv[1:])
