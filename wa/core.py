@@ -3,13 +3,31 @@
 import sys
 import os
 import re
+import pickle
+import hashlib
 
-variables = {}
+pickle_hash = hashlib.md5()
+pickle_hash.update(os.getcwd().encode())
+pickle_dump = os.path.join(os.path.expanduser("~"), ".wa", "_wa_temp", pickle_hash.hexdigest())
+
+if not os.path.exists(os.path.join(os.path.expanduser("~"), ".wa", "_wa_temp")):
+    os.makedirs(os.path.join(os.path.expanduser("~"), ".wa", "_wa_temp"))
+
+if not os.path.exists(os.path.join(os.path.expanduser("~"), ".wa", "_wa_temp", pickle_hash.hexdigest())):
+    with open(pickle_dump, "w") as f:
+        f.close()
+
+try:
+    variables = pickle.load(open(pickle_dump, "rb"))
+except EOFError:
+    variables = {} 
 
 def main(in_args):
+    global variables
     if len(in_args) >= 1:
         command_file, args = get_command_file(in_args)
         execute_command(command_file, args)
+        variables = pickle.load(open(pickle_dump, "rb"))
 
 def execute_command(command_file, args = None):
     if args == None:
