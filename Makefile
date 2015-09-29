@@ -1,8 +1,5 @@
+all: install
+
 install:
 	pip install -r requirements.txt
-	setup.py install
-develop:
-	pip install -r requirements.txt
-	setup.py develop
-test:
-	py.test
+	python3 setup.py install
