@@ -1,7 +1,7 @@
 wa
 ==
 
- .. image:: https://badge.fury.io/py/wa.svg
+.. image:: https://badge.fury.io/py/wa.svg
     :target: https://pypi.python.org/pypi/wa
 
 **Текущаяя версия wa находится в стадии разработки. Это альфа-версия и она с большой долей вероятности может содержать ошибки. Рекомендуется использовать Python 3.x, работа в Python 2 пока не протестирована.**
