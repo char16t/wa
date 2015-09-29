@@ -7,6 +7,8 @@ config = {
     'name': 'wa',
     'author': 'Valeriy Manenkov',
     'author_email': 'v.manenkov@gmail.com',
+    'description': 'Workflow automation tool',
+    'license': 'MIT',
     'version': '0.1.0',
     'url': 'https://github.com/char16t/wa',
     'download_url': 'https://github.com/char16t/wa/archive/master.tar.gz',
