@@ -1,4 +1,6 @@
-# wa
+==
+wa
+==
 Workflow automation tool
 
 Avaiable on PyPI: https://pypi.python.org/pypi/wa/0.1.0
