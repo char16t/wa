@@ -195,6 +195,74 @@ cptpl
         - input PROJECT_NAME PROJECT_DESCRIPTION PROJECT_LICENSE
         - cptpl /home/user/templates/cpp_lib |.
 
+Первым аргументом указывается папка, содержащая шаблон, а вторым аргументом путь, куда этот шаблон будет скопирован. Например, для Python-проектов шаблон может выглядеть так: создадим каталог :code:`/home/user/templates/python` со следующим содержимым
+
+.. code-block:: code
+    
+    [[PROJECT_NAME]]
+        __init__.py
+        [[PRPJECT_NAME]].py
+    tests
+        __init__.py
+
+А в содержимое файла :code:`[[PRPJECT_NAME]].py` исправим на 
+
+.. code-block:: code
+    
+    # This file is a part of <<<PROJECT_NAME>>>
+    # Licensed under MIT. See LICENSE file for details
+    # (c) 2015 <<<AUTHOR_NAME>>> <<<<AUTHOR_EMAIL>>>>
+    
+    def main():
+        pass
+        
+    if __name__ == "__main__":
+        main()
+
+Теперь при вызове wa будет предложено ввести значения переменных, а затем шаблон будет скопирован. Так выглядит :code:`.wa`-файл
+
+.. code-block:: yaml
+    
+    pyscaffold:
+        - cptpl /home/user/templates/python |.
+
+Обратите внимание, что в примере выше не требуется просить пользователя ввести нужные переменные. Запрос на ввод будет происходить автоматически, как только будет встречена незнакомая переменная.
+
+wa сохраняет введенные значения переменных в рамках каждого вашего проекта. Если вы ввели ранее значение, например, для :code:`PROJECT_NAME` то больше запрос на ввод происходить не будет. Если нужно принудительно обновить значение переменной, запрашивайте у пользователя значение заново, с помощью команды :code:`input`
+
+Теперь нужно выполнить в консоли
+
+.. code-block:: bash
+
+    $ wa pyscaffold
+    $ PROJECT_NAME=helloworld
+    $ PROJECT_AUTHOR=Foo Bar
+    $ AUTHOR_EMAIL=foo@bar.com
+
+В результате, будет создана следующа структура директорий
+
+.. code-block:: code
+    
+    helloworld
+        __init__.py
+        helloworld.py
+    tests
+        __init__.py
+
+А файл :code:`helloworld/helloworld.py` будет иметь следующее содержимое
+
+.. code-block:: code
+    
+    # This file is a part of helloworld
+    # Licensed under MIT. See LICENSE file for details
+    # (c) 2015 Foo Bar <foo@bar.com>
+    
+    def main():
+        pass
+        
+    if __name__ == "__main__":
+        main()
+
 cptpljinja2
 ~~~~~~~~~~~
 :code:`cptpljinja2 <источник> <цель>` копирует из источника в цель с заменой :code:`[[переменная]]` на значение переменной в именах файлов и папок, а содержимое компилирует из шаблонов Jinja2, которые лежат в файлах источника.
