@@ -251,7 +251,7 @@ Now when you call wa will be prompted to enter the values of the variables, and 
 
 Please note that in the example above are not required to ask the user to input the required variables. The prompt will happen automatically as soon as encountered unknown variable.
 
-wa stores the values of variables within each of your project. If you previously entered value, for example,: code:`PROJECT_NAME` more prompt will not occur. If you want to forcibly update the value of a variable ask the user for the value again, using the command :code:`input`т. Если нужно принудительно обновить значение переменной, запрашивайте у пользователя значение заново, с помощью команды :code:`input`
+wa retains the values of variables within each of your project. If you previously entered value, for example,: code:`PROJECT_NAME` more prompt will not occur. If you want to forcibly update the value of a variable ask the user for the value again, using the command :code:`input`
 
 Now you need to run in console
 
@@ -340,7 +340,7 @@ py
 
 Issues
 ------
-About any errors, problems, any questions or with any suggestions you can write to v-mail.manenkov (at) gmail.com or create a task in Github Issues https://github.com/char16t/wa/issues
+About any errors, problems, any questions or with any suggestions you can write to v.manenkov (at) gmail.com or create a issue in Github Issues https://github.com/char16t/wa/issues
 
 License
 -------
