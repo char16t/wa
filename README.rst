@@ -342,4 +342,4 @@ About any errors, problems, any questions or with any suggestions you can write 
 
 License
 -------
-Source code licensed under MIT. Текст лицензии находится в файле LICENSE. The license text is in the LICENSE file.
+Source code licensed under MIT. The license text is in the LICENSE file.
