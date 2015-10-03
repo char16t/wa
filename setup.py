@@ -18,7 +18,15 @@ config = {
         'console_scripts': [
             'wa=wa.cli:main'
         ]
-    }
+    },
+    'classifiers': [
+        'Environment :: Console',
+        'License :: OSI Approved :: MIT License',
+        'Intended Audience :: Developers',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3',
+    ],
 }
 
 setup(**config)
