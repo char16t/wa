@@ -33,6 +33,7 @@ config = {
     'classifiers': [
         'Environment :: Console',
         'License :: OSI Approved :: MIT License',
+        'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
