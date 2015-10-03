@@ -14,7 +14,7 @@ config = {
     'download_url': 'https://github.com/char16t/wa/archive/master.tar.gz',
     'install_requires': ['pyyaml', 'Jinja2'],
     'packages': ['wa'],
-    'entry_points' : {
+    'entry_points': {
         'console_scripts': [
             'wa=wa.cli:main'
         ]

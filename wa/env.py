@@ -1,12 +1,14 @@
 import os
 import wa.api
 
+
 class Environment():
+
     def __init__(self):
         self.manifest = None
         self.project_root = None
         self.api = wa.api.GeneratorAPI(self.project_root)
-    
+
     def set_project_root(self, path):
         if path != None:
             self.project_root = path
@@ -15,7 +17,7 @@ class Environment():
             elif os.path.isfile(os.path.join(os.path.expanduser("~"), '.wa')):
                 self.manifest = os.path.join(os.path.expanduser("~"), ".wa")
             self.api = wa.api.GeneratorAPI(self.project_root)
-    
+
     def run(self, cmd):
         cmd = self.get_variables_values(cmd)
         arguments = cmd.split(' ')
@@ -48,15 +50,16 @@ class Environment():
             # исполнять всё что находится вне функций в файле
             # или всё, что запускается если __name__ == __main__
             self.api.py(arguments[1], arguments[2])
-    
+
     def get_variables_values(self, cmd):
         for var in self.api.vars:
             try:
-                cmd = cmd.replace('${'+var+'}', self.api.vars[var])
+                cmd = cmd.replace('${' + var + '}', self.api.vars[var])
             except:
                 continue
         return cmd
-    
+
+
 def copy_tree(src, dst):
     """Copy directory tree"""
     for root, subdirs, files in os.walk(src):
