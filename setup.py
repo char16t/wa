@@ -1,7 +1,14 @@
+# coding=utf-8
+
+import os
+
 try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
+
+def local_file(name):
+    return os.path.relpath(os.path.join(os.path.dirname(__file__), name))
 
 __version__ = None
 
@@ -12,6 +19,7 @@ assert __version__ is not None
 
 with open('README.rst') as f:
     long_description = f.read()
+
 
 config = {
     'name': 'wa',
