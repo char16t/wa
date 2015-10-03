@@ -5,7 +5,7 @@ from wa.env import Environment
 
 def main():
     if len(sys.argv) == 1:
-        print("wa: workflow automation tool")
+        print('wa: workflow automation tool')
         sys.exit()
 
     env = Environment()

@@ -9,7 +9,7 @@ def parse_args(envirnment, arguments):
         with open(manifest, 'r') as stream:
             available_arguments = yaml.load(stream)
     except:
-        print("An error occurred while attempting to open the Manifest-file.")
+        print('An error occurred while attempting to open the Manifest-file.')
         sys.exit()
     else:
         for argument in arguments:
@@ -44,7 +44,7 @@ def alternate_parse_args(envirnment, arguments):
         with open(manifest, 'r') as stream:
             available_arguments = yaml.load(stream)
     except:
-        print("An error occurred while attempting to open the Manifest-file.")
+        print('An error occurred while attempting to open the Manifest-file.')
         sys.exit()
     else:
         for argument in arguments:
@@ -71,7 +71,7 @@ def alternate_parse_args(envirnment, arguments):
 
 
 def find_manifest(path=os.getcwd()):
-    if not os.path.isfile(os.path.join(path, '.wa')) and os.path.dirname(path) != os.path.dirname(os.path.expanduser("~")):
+    if not os.path.isfile(os.path.join(path, '.wa')) and os.path.dirname(path) != os.path.dirname(os.path.expanduser('~')):
         if os.path.dirname(path) == path:
             # you have yourself root.
             # works on Windows and *nix paths.
@@ -79,12 +79,12 @@ def find_manifest(path=os.getcwd()):
 
             # If .wa not found, but exist in <home path>
             # current dir will be a project root
-            if os.path.isfile(os.path.join(os.path.expanduser("~"), '.wa')):
+            if os.path.isfile(os.path.join(os.path.expanduser('~'), '.wa')):
                 touch('.wa')
                 return '.'
             else:
-                print(os.path.join(os.path.expanduser("~"), '.wa'))
-                print("Manifest-file not found")
+                print(os.path.join(os.path.expanduser('~'), '.wa'))
+                print('Manifest-file not found')
                 sys.exit()
         path = os.path.abspath(os.path.join(path, os.pardir))
         return find_manifest(path)

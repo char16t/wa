@@ -13,9 +13,9 @@ class Environment():
         if path != None:
             self.project_root = path
             if os.path.isfile(os.path.join(path, '.wa')):
-                self.manifest = os.path.join(path, ".wa")
-            elif os.path.isfile(os.path.join(os.path.expanduser("~"), '.wa')):
-                self.manifest = os.path.join(os.path.expanduser("~"), ".wa")
+                self.manifest = os.path.join(path, '.wa')
+            elif os.path.isfile(os.path.join(os.path.expanduser('~'), '.wa')):
+                self.manifest = os.path.join(os.path.expanduser('~'), '.wa')
             self.api = wa.api.GeneratorAPI(self.project_root)
 
     def run(self, cmd):

@@ -20,7 +20,7 @@ class GeneratorAPI:
         self.project_root = project_root
 
     def user_input(self, var):
-        self.vars[var] = input(var + "=")
+        self.vars[var] = input(var + '=')
 
     def set(self, key, value):
         self.vars[key] = value
@@ -121,9 +121,9 @@ class GeneratorAPI:
         self.cd(self.current_directory)
         if filename[0] == '|':
             filename = os.path.join(self.project_root, filename[1:])
-        loader = importlib.machinery.SourceFileLoader("tplconf", filename)
+        loader = importlib.machinery.SourceFileLoader('tplconf', filename)
         external = loader.load_module()
-        eval("external." + fnc + "()")
+        eval('external.' + fnc + '()')
 
     def copy_tree_and_replace_vars(self, src, dst):
         """
@@ -187,10 +187,10 @@ class GeneratorAPI:
         if not (var_name in self.vars):
             self.user_input(var_name)
         if isfilename == False:
-            line = re.sub("<<<" + var_name + ">>>", self.vars[var_name], line)
+            line = re.sub('<<<' + var_name + '>>>', self.vars[var_name], line)
         else:
             line = re.sub(
-                "\[\[" + var_name + "\]\]", self.vars[var_name], line)
+                '\[\[' + var_name + '\]\]', self.vars[var_name], line)
         return line
 
 
