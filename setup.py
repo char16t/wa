@@ -17,7 +17,7 @@ with open(local_file("wa/version.py")) as o:
 
 assert __version__ is not None
 
-with open('README.rst') as f:
+with open('README.en.rst') as f:
     long_description = f.read()
 
 
