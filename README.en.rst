@@ -7,6 +7,7 @@ wa
 **wa is a prototype and development is not planned. This version is
 likely to contain errors. It is recommended to use Python 3.x, work in Python 2
 not tested.**
+
 wa (workflow automation) — simple cross-platform tool created to automate routine tasks in the development process. For example, it can be used to quickly create a skeleton project from a previously created template or perform complex tasks in a single command.
 
 The goal of wa is to allow us to share best practice in software development and simplify the reuse of code in their software projects. The manifest file in YAML format contains the commands and corresponding actions, and preparation of the source code files are stored as templates. The manifest and templates can be distributed along the source code of your project.
