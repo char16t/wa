@@ -4,28 +4,32 @@ wa
 .. image:: https://badge.fury.io/py/wa.svg
     :target: https://pypi.python.org/pypi/wa
 
-**You can read this document in English. See README.en.rst file.**
+**wa is a prototype and development is not planned. This version is
+likely to contain errors. It is recommended to use Python 3.x, work in Python 2
+not tested.**
 
-**wa является прототипом и дальнейшая разработка не планируется. Эта версия с
-большой долей вероятности может содержать ошибки. Рекомендуется использовать
-Python 3.x, работа в Python 2 не протестирована.**
+wa (workflow automation) — simple cross-platform tool created to automate routine tasks in the development process. For example, it can be used to quickly create a skeleton project from a previously created template or perform complex tasks in a single command.
 
-wa (от workflow automation) — простой кроссплатформенный инструмент, созданный для автоматизации рутинных задач в процессе разработки. Например, его можно использовать для быстрого создания каркаса проекта из ранее созданного шаблона или выполнения сложной задачи в одну команду.
+The goal of wa is allow to share best practice in software development and simplify the reuse of code in their software projects. The manifest file in YAML format contains the commands and corresponding actions, and preparation of the source code files are stored as templates. The manifest and templates can be distributed along the source code of your project.
 
-Цель wa — позволить делиться лучшими практиками при разработке ПО и упросить переиспользование кода в своих программных проектах. Файл :code:`.wa` в формате YAML содержит команды и соответствующие им действия, а заготовки файлов с исходным кодом хранятся как шаблоны. :code:`.wa`-файл и шаблоны могут распространяться вместе исходным кодом вашего проекта.
-
-.. contents:: Содержание
+.. contents:: Conents
    :depth: 3
 
-Установка
----------
-С помощью pip
+Installation
+------------
+Using pip
 
 .. code-block:: bash
     
     pip install wa
 
-или из исходного кода
+Using easy_nstall
+
+.. code-block:: bash
+    
+    easy_install wa
+
+from source code
 
 .. code-block:: bash
     
@@ -33,29 +37,29 @@ wa (от workflow automation) — простой кроссплатформен�
     cd wa
     make install
 
-Быстрый старт
+Quick start
 -------------
-wa может быть вызван из консоли
+wa may be called from console
 
 .. code-block:: bash
     
     wa
     wa: workflow automation tool
     
-wa принимает в качестве аргументов команды, которым сопоставлены действия. Описав однажды команду :code:`startproject` вы можете вызвать её следующим образом:
+wa takes as command arguments, which are mapped to actions. Describing one command :code:`startproject` you can call it as follows:
 
 .. code-block:: bash
     
     wa startproject
 
-Поддерживаются команды неограниченной вложенности. Вы можете описать также команды :code:`startproject python`, :code:`startproject cpp` или :code:`startproject cpplib`. Вызвать их можно так:
+Commands unlimited nesting are supported. You can also describe the commands :code:`python startproject`, :code:`startproject cpp` or :code:`startproject cpplib`. You can call them so:
 
 .. code-block:: bash
     
     wa startproject python
     wa startproject cpp
     
-Команды описываются в файлах :code:`.wa` в формате YAML. Например, для примеров выше это может выглядеть так:
+The commands are described in the files :code:`.wa` in YAML format. For the examples above it might look like this:
 
 .. code-block:: yaml
 
@@ -76,33 +80,33 @@ wa принимает в качестве аргументов команды, �
         cpplib:
             - cp /home/user/mypath/templates/cpplib .
 
-Файл :code:`.wa` может лежать в корне вашего проекта и в вашей домашней директории. wa сначала попробует выполнить поиск запрошенной команды в корне вашего проекта, а затем, если не найдёт её там обратится к файлу :code:`.wa` в вашей домашней директории и выполнит поиск команды там. То есть, создав файл :code:`.wa` как в примере выше в домашней директории, вы сможете выполнить, например
+The file :code:`.wa` can be located in the root of your project and in your home directory. wa will first try to do a search of the requested command in root of your project, and then, if the command is not found, will return to the file :code:`.wa` in your home directory and looks for  there. That is, by creating the file :code:`.wa` as in the above example in your home directory, you will be able to perform
 
 .. code-block:: bash
     
     $ wa startproject python
 
-Будет предложено ввести значение для переменной :code:`PROJECTNAME`
+You are prompted to enter a value for the variable :code:`PROJECTNAME`
     
 .. code-block:: bash
     
     $ wa startproject python
     $ PROJECTNAME=_
 
-Пусть, это будет :code:`helloworld`:
+Let it be :code:`helloworld`:
 
 .. code-block:: bash
     
     $ wa startproject python
     $ PROJECTNAME=helloworld
 
-и развернуть секелет Python-проекта :code:`helloworld` в любой директории. Обратите внимание, что в текущей директории, возможно, стоит также создать пустой файл :code:`.wa`. Он будет сигналом для wa, что именно здесь находится корень проекта. Теперь, если вы уйдёте в поддиректорию текущей директории и попытаетесь выполнить произвольную команду, её поиск будет произведен сначала в том файле, что находится на уровень выше в дереве директорий.
+and deploy the skeleton of a Python project :code:`helloworld` in any directory. Please note that in the current directory, perhaps it should also create an empty file :code:`.wa`. It will be a signal to wa that it is the root of the project. Now, if you go in a subdirectory of the current directory and attempt to execute an arbitrary command, the search will be done first in that file that is one level higher in the directory tree.
 
-Вообще говоря, wa именно так и работает: поиск файла выполняется сначала в текущей директории, затем в директории выше и так далее до корня файловой системы. Если файл :code:`.wa` не был найден, то поиск продолжится в домашней директории.
+wa does exactly that: search a file in the current directory first, then in the directory above and so on until the root file system. If the file is :code:`.wa` was not found, the search will continue in your home directory.
 
-В файле :code:`.wa` лежащем в корне вашего проекта вы можете переопределить любые команды (например, :code:`startproject python` из листингов выше). То есть, вы можете распространять :code:`.wa`-файл вместе с кодом вашего проекта и помочь другим разработчикам, например, быстро создать скелет класса, оформленный по стандартам проекта.
+In the file :code:`.wa` lying at the root of your project you can override any command (for example, :code:`python startproject` from the listings above). That is, you can redistribute it and :code:`.wa`-file along with the code of your project and to help other developers, for example, to quickly create the skeleton of the class, formatted according to the standards of the project.
 
-wa позволяет также работать с файлами и каталогами относительно корня вашего проекта. Для этого нужно указать вертикальную черту перед путём к файлу или каталогу
+wa also allows you to work with files and directories relative to the root of your project. By specifying a vertical line before the path to the file or directory
 
 .. code-block:: yaml
     
@@ -111,9 +115,10 @@ wa позволяет также работать с файлами и ката�
         - cp |.code_templates/class.cpp |src/${CLASSNAME}.cpp
         - cp |.code_templates/header.cpp |include/${CLASSNAME}.hpp
         
-При исполнении примера выше будет произведено копирование файлов :code:`.code_templates/class.cpp` и :code:`.code_templates/header.hpp` с заданным именем в директории :code:`src` и :code:`include` соответственно. Здесь главное, что вы можете находиться в любой директории вашего проекта, но копирование будет произведено относительно корня проекта, т.к. это явно указано вертикальной чертой :code:`|`.
 
-В примере ниже вертикальной черты в начале вторых аргументов нет
+In the execution of the above example copies the file :code:`.code_templates/class.cpp` and :code:`.code_templates/header.hpp` with the specified name in the directory :code:`src` and :code:`include`, respectively. The main thing here is that you can be in any directory of your project, but a copy will be made relative to the root project, because it is explicitly specified with a vertical bar :code:`|`.
+
+In the example below, a vertical bar at the beginning of the second there are no arguments
 
 .. code-block:: yaml
     
@@ -122,17 +127,19 @@ wa позволяет также работать с файлами и ката�
         - cp |.code_templates/class.cpp ${CLASSNAME}.cpp
         - cp |.code_templates/header.cpp ${CLASSNAME}.hpp
 
-При исполнении этого примера будут скопированы файлы с заданными именами в текущую директорию. Например, если вы находитесь в директории :code:`my_great_cpp_app/legacy`, то файлы будут скопированы в неё, а если находитесь в :code:`my_great_cpp_app/legacy/tests`, то в неё.
+When running this example will copy all the files with the specified names in the current directory. For example, if you are in the directory :code:`my_great_cpp_app/legacy`, the files will be copied into it, and if you're in :code:`my_great_cpp_app/legacy/tests` on it.
 
-Вертикальную черту в начале путей до файлов и папок можно использовать в любых командах.
+A vertical bar at the beginning of the paths to files and folders can be used in any commands.
 
-Доступные команды (API)
------------------------
-Вы можете использовать описанные ниже команды. Для каждой команды примеден пример использования.
+
+The available commands (API)
+----------------------------
+
+You can use the following commands. For each command an example of using.
 
 set
 ~~~
-:code:`set <переменная> <значение>` устанавливает значение для переменной. После в любых командах можно использовать переменную как :code:`${переменная}`. Имена переменных задаются с учётом регистра.
+:code:`set <variable> <value>` sets the value for the variable. After that, in any commands, you can use a variable like :code:`${variable}`. The variable names are defined case-sensitive.
 
 .. code-block:: yaml
     
@@ -143,7 +150,7 @@ set
 
 input
 ~~~~~
-:code:`input <имя переменной>` Запрашивает ввод у пользователя переменной
+:code:`input <variable>` requests for input from the user variable
 
 .. code-block:: yaml
     
@@ -154,7 +161,7 @@ input
 
 cd
 ~~
-:code:`cd <путь>` переходит по заданному пути.
+:code:`cd <path>` goes to the specified path.
 
 .. code-block:: yaml
     
@@ -166,7 +173,7 @@ cd
 
 mkdir
 ~~~~~
-:code:`mkdir <имя папки> [<имя папки> [<имя папки>]]` создаёт папки с заданными именами.
+:code:`mkdir <directory name> [<directory name> [<directory name>]]` creates dirs with the specified names.
 
 .. code-block:: yaml
     
@@ -175,7 +182,7 @@ mkdir
 
 touch
 ~~~~~
-:code:`touch <имя файла> [<имя файла> [<имя файла>]]` создаёт файлы с заданными именами.
+:code:`touch <file name> [<file name> [<file name>]]` creates files with the specified names
 
 .. code-block:: yaml
     
@@ -184,7 +191,7 @@ touch
 
 rm
 ~~
-:code:`rm <имя файла или папки> [<имя файла или папки> [<имя файла или папки>]]` удаляет файлы и папки с заданными именами.
+:code:`rm <file or directory name> [<file or directory name> [<file or directory name>]]` removes files and folders with the specified names.
 
 .. code-block:: yaml
     
@@ -194,7 +201,7 @@ rm
 
 cp
 ~~
-:code:`cp <источник> <цель>` копирует из источника в цель.
+:code:`cp <source> <target>>` copies from source to target.
 
 .. code-block:: yaml
     
@@ -204,7 +211,7 @@ cp
 
 cptpl
 ~~~~~
-:code:`cptpl <источник> <цель>` копирует из источника в цель с заменой :code:`[[переменная]]` на значение переменной в именах файлов и папок и :code:`<<<переменная>>>` на значение переменной в содержимом файлов.
+:code:`cptpl <source> <target>` copies from source to target with replacement :code:`[[variable]]` on the value of the variable in file names and folders and :code:`<<<variable>>>` the value of the variable in the contents of the files.
 
 .. code-block:: yaml
     
@@ -212,9 +219,9 @@ cptpl
         - input PROJECT_NAME PROJECT_DESCRIPTION PROJECT_LICENSE
         - cptpl /home/user/templates/cpp_lib |.
 
-Первым аргументом указывается папка, содержащая шаблон, а вторым аргументом путь, куда этот шаблон будет скопирован. Например, для Python-проектов шаблон может выглядеть так: создадим каталог :code:`/home/user/templates/python` со следующим содержимым
+The first argument specifies the folder that contains the template, and the second argument the path where the template will be copied. For example, for the Python project template might look like this: create directory :code:`/home/user/templates/python` with the following content
 
-.. code-block:: code
+.. code-block::
     
     [[PROJECT_NAME]]
         __init__.py
@@ -222,9 +229,9 @@ cptpl
     tests
         __init__.py
 
-А в содержимое файла :code:`[[PRPJECT_NAME]].py` исправим на 
+Insert to file :code:`[[PRPJECT_NAME]].py` this content:
 
-.. code-block:: code
+.. code-block::
     
     # This file is a part of <<<PROJECT_NAME>>>
     # Licensed under MIT. See LICENSE file for details
@@ -236,16 +243,17 @@ cptpl
     if __name__ == "__main__":
         main()
 
-Теперь при вызове wa будет предложено ввести значения переменных, а затем шаблон будет скопирован. Так выглядит :code:`.wa`-файл
+Now when you call wa will be prompted to enter the values of the variables, and then the template will be copied. It looks like :code:`.wa`-file
 
 .. code-block:: yaml
     
     pyscaffold:
         - cptpl /home/user/templates/python |.
 
-Обратите внимание, что в примере выше не требуется просить пользователя ввести нужные переменные. Запрос на ввод будет происходить автоматически, как только будет встречена незнакомая переменная.
 
-Теперь нужно выполнить в консоли
+Please note that in the example above are not required to ask the user to input the required variables. The prompt will happen automatically as soon as encountered unknown variable.
+
+Now you need to run in console
 
 .. code-block:: bash
 
@@ -254,9 +262,9 @@ cptpl
     $ PROJECT_AUTHOR=Foo Bar
     $ AUTHOR_EMAIL=foo@bar.com
 
-В результате, будет создана следующа структура директорий
+As a result, it will create the following directory structure
 
-.. code-block:: code
+.. code-block::
     
     helloworld
         __init__.py
@@ -264,9 +272,9 @@ cptpl
     tests
         __init__.py
 
-А файл :code:`helloworld/helloworld.py` будет иметь следующее содержимое
+And the file :code:`helloworld/helloworld.py` will have the following content
 
-.. code-block:: code
+.. code-block::
     
     # This file is a part of helloworld
     # Licensed under MIT. See LICENSE file for details
@@ -280,7 +288,7 @@ cptpl
 
 cptpljinja2
 ~~~~~~~~~~~
-:code:`cptpljinja2 <источник> <цель>` копирует из источника в цель с заменой :code:`[[переменная]]` на значение переменной в именах файлов и папок, а содержимое компилирует из шаблонов Jinja2, которые лежат в файлах источника.
+:code:`cptpljinja2 <source> <destination>>` copy from source to target with replacement :code:`[[variable]]` on the value of the variable in file names and folders and compiles content from Jinja2 templates that are in the source files.
 
 .. code-block:: yaml
     
@@ -290,7 +298,7 @@ cptpljinja2
 
 mv
 ~~
-:code:`mv <источник> <цель>` перемещает файлы и папки из источника в цель.
+:code:`mv <source> <destination>` moves the files and folders from source to destination..
 
 .. code-block:: yaml
     
@@ -301,7 +309,7 @@ mv
 
 echo
 ~~~~
-:code:`echo <соощение>` выводит сообщение на экран.
+:code:`echo <message>` displays a message on the screen.
 
 .. code-block:: yaml
     
@@ -311,7 +319,7 @@ echo
 
 exec
 ~~~~
-:code:`exec <команда>` выполняет команду в командной строке операционной системы.
+:code:`exec <command>` executes the command on the command line of the operating system.
 
 .. code-block:: yaml
     
@@ -321,7 +329,7 @@ exec
 
 py
 ~~
-:code:`py <имя файла> <функция>` функцию из файла в интерпретаторе Python.
+:code:`py <file name> <function>` execute function from file in Python interpreter.
 
 .. code-block:: yaml
     
@@ -330,10 +338,10 @@ py
         - py runtests.py main
 
 
-Ошибки и проблемы
------------------
-О любых ошибках, по любым вопросам и с любыми предложениями вы можете написать на почту v.manenkov (at) gmail.com или создать задачу в Github Issues https://github.com/char16t/wa/issues
+Issues
+------
+About any errors, problems, any questions or with any suggestions you can write to v.manenkov (at) gmail.com or create a issue in Github Issues https://github.com/char16t/wa/issues
 
-Лицензия
---------
-Исходный код распространяется под лицензией MIT. Текст лицензии находится в файле LICENSE. 
+License
+-------
+Source code licensed under MIT. The license text is in the LICENSE file.
