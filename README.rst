@@ -1,8 +1,16 @@
 wa
 ==
 
-.. image:: https://badge.fury.io/py/wa.svg
+|pypi| |dwAll| |dwMonth| |dwWeek|
+
+.. |pypi| image:: https://badge.fury.io/py/wa.svg
     :target: https://pypi.python.org/pypi/wa
+.. |dwAll| image:: https://pepy.tech/badge/wa
+    :target: https://pepy.tech/project/wa
+.. |dwMonth| image:: https://pepy.tech/badge/wa/month
+    :target: https://pepy.tech/project/wa/month
+.. |dwWeek| image:: https://pepy.tech/badge/wa/week
+    :target: https://pepy.tech/project/wa/week
 
 **wa is a prototype and development is not planned. This version is
 likely to contain errors. It is recommended to use Python 3.x, work in Python 2
